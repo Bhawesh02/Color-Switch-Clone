@@ -5,14 +5,25 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
 
+
     [SerializeField]
     private Rigidbody2D playerRb;
     [SerializeField]
     private float jumpForce ;
     [SerializeField]
     private float bottomScreen = -8.2f;
+    [SerializeField]
+    private SpriteRenderer playerSr;
 
 
+    public string[] colors;
+    public Color[] color;
+
+    private void Start()
+    {
+        int noOfColors = color.Length;
+        playerSr.color = color[Random.Range(0,noOfColors - 1)];
+    }
     // Update is called once per frame
     void Update()
     {
@@ -37,7 +48,7 @@ public class PlayerControl : MonoBehaviour
         //collided with color orb change color of player
         if (collision.gameObject.CompareTag("Color-Orb"))
         {
-
+            playerSr.color = collision.gameObject.GetComponent<SpriteRenderer>().color;
             Destroy(collision.gameObject);
         }
 
