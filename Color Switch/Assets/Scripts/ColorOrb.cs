@@ -5,8 +5,8 @@ using UnityEngine;
 public class ColorOrb : MonoBehaviour
 {
     public PlayerControl playerControl;
-    [SerializeField]
-    private int colorIndex;
+    
+    public int colorIndex;
 
     [SerializeField]
     private SpriteRenderer orbSr; 

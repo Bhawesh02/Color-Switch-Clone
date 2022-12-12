@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Color-Orb
+  - Cyan
+  - Pink
+  - Purple
+  - Yellow
   layers:
   - Default
   - TransparentFX

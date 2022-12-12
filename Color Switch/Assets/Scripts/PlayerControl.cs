@@ -14,7 +14,9 @@ public class PlayerControl : MonoBehaviour
     private float bottomScreen = -8.2f;
     [SerializeField]
     private SpriteRenderer playerSr;
-
+    [SerializeField]
+    private int playerColorIndex;
+    
 
     public string[] colors;
     public Color[] color;
@@ -22,7 +24,8 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         int noOfColors = color.Length;
-        playerSr.color = color[Random.Range(0,noOfColors - 1)];
+        playerColorIndex = Random.Range(0, noOfColors - 1);
+        playerSr.color = color[playerColorIndex];
     }
     // Update is called once per frame
     void Update()
@@ -49,8 +52,14 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.CompareTag("Color-Orb"))
         {
             playerSr.color = collision.gameObject.GetComponent<SpriteRenderer>().color;
+            playerColorIndex = collision.gameObject.GetComponent<ColorOrb>().colorIndex;
             Destroy(collision.gameObject);
         }
-
+        
+        //Check color of ball same as that of collided
+        if(collision.gameObject.CompareTag(colors[playerColorIndex]))
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
     }
 }
