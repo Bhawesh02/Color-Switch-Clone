@@ -9,6 +9,7 @@ TagManager:
   - Pink
   - Purple
   - Yellow
+  - Obstacle
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-
+    [SerializeField]
+    private GameManager gameManager;
 
     [SerializeField]
     private Rigidbody2D playerRb;
@@ -15,17 +16,13 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private SpriteRenderer playerSr;
     [SerializeField]
-    private int playerColorIndex;
+    private string playerColorName;
     
 
-    public string[] colors;
-    public Color[] color;
 
     private void Start()
     {
-        int noOfColors = color.Length;
-        playerColorIndex = Random.Range(0, noOfColors - 1);
-        playerSr.color = color[playerColorIndex];
+        playerSr.color = gameManager.colorinScene[Random.Range(0, gameManager.colorinScene.Count - 1)];
     }
     // Update is called once per frame
     void Update()
@@ -52,12 +49,12 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.CompareTag("Color-Orb"))
         {
             playerSr.color = collision.gameObject.GetComponent<SpriteRenderer>().color;
-            playerColorIndex = collision.gameObject.GetComponent<ColorOrb>().colorIndex;
+            playerColorName = collision.gameObject.GetComponent<ColorOrb>().colorName;
             Destroy(collision.gameObject);
         }
         
-        //Check color of ball same as that of collided
-        if(collision.gameObject.CompareTag(colors[playerColorIndex]))
+        //Check color of ball not same as that of collided
+        else if(!collision.gameObject.CompareTag(playerColorName))
         {
             UnityEditor.EditorApplication.isPlaying = false;
         }
